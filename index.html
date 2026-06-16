@@ -172,10 +172,10 @@
               <input type="text" id="share-link-url" class="share-link-input" readonly>
             </div>
             <div style="background: white; padding: 0.75rem; border-radius: 0.75rem; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); margin: 0.5rem 0;">
-              <img id="share-qr-code" src="" alt="Scan Me to Track" style="width: 150px; height: 150px; display: block;">
+              <img id="share-qr-code" src="" alt="Scan Me to Track" style="width: 180px; height: 180px; display: block;">
             </div>
             <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;">Scan to Track Flight Status</span>
-            <span style="font-size: 0.7rem; color: var(--text-secondary);">Show this QR code on your screen to your friend. When they scan it with their phone camera, they will immediately open the flight status page and open the flight status.</span>
+            <span style="font-size: 0.7rem; color: var(--text-secondary);">Show this QR code on your screen to your friend. When they scan it with their phone camera, they will immediately open the flight status page and show the override alert.</span>
           </div>
 
         </div>
@@ -187,9 +187,12 @@
           </h2>
           
           <!-- Boarding Pass Container -->
-          <div id="preview-boarding-pass" class="boarding-pass-card theme-emirates">
+          <div id="preview-boarding-pass" class="boarding-pass-card theme-emirates" style="margin-bottom: 1rem;">
             <!-- Rendered dynamically by app.js -->
           </div>
+          <button id="btn-print-preview" class="btn-secondary" style="width: 100%; max-width: 420px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fas fa-print"></i> Save Preview as PDF / Print
+          </button>
         </div>
       </div>
     </div>

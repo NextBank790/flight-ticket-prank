@@ -46,6 +46,14 @@ function initApp() {
     };
   }
 
+  // Bind print preview button click listener
+  const printPreviewBtn = document.getElementById("btn-print-preview");
+  if (printPreviewBtn) {
+    printPreviewBtn.onclick = () => {
+      window.print();
+    };
+  }
+
   if (ticketData) {
     try {
       const decoded = decodeState(ticketData);
@@ -135,8 +143,8 @@ function renderBoardingPass(containerId) {
   const trackingData = encodeState(config);
   const trackingUrl = `${baseShareUrl}?t=${trackingData}&track=true`;
   
-  // Fallback to visual barcode if API goes offline
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(trackingUrl)}`;
+  // Fallback to visual barcode if API goes offline (increased size and lower ECC density for easy scanning)
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=L&data=${encodeURIComponent(trackingUrl)}`;
 
   // Update theme class on boarding pass
   container.className = `boarding-pass-card theme-${config.airline}`;
@@ -261,8 +269,8 @@ function generateShareLink(directToTracker) {
   resultCard.style.display = "flex";
   linkInput.value = link;
   
-  // Update QR Code image source
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(link)}`;
+  // Update QR Code image source (increased size and lower ECC density for easy scanning)
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=L&data=${encodeURIComponent(link)}`;
   if (qrImage) {
     qrImage.src = qrCodeUrl;
   }
