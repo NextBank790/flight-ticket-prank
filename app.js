@@ -1,4 +1,4 @@
-// Flight Ticket Prank Generator Logic
+// Boarding Pass & Flight Status Suite Logic
 
 // Default configuration for a quick start
 const DEFAULT_FLIGHT = {
@@ -18,10 +18,10 @@ const DEFAULT_FLIGHT = {
   depDate: "18 JUN 26",
   depTime: "08:30 AM",
   arrTime: "02:15 PM",
-  prankType: "security",
-  prankDelay: "5",
-  prankTitle: "SECURITY ENFORCEMENT NOTICE",
-  prankMsg: "PASSENGER UNDER SECURITY HOLD. Passenger has been flagged by custom authorities for 'excessive level of silliness' and 'carrying contraband snacks'. Please remain where you are. Air Marshal has been dispatched."
+  alertType: "security",
+  alertDelay: "5",
+  alertTitle: "SECURITY ENFORCEMENT NOTICE",
+  alertMsg: "PASSENGER UNDER SECURITY HOLD. Passenger has been flagged by custom authorities for 'excessive level of silliness' and 'carrying contraband snacks'. Please remain where you are. Air Marshal has been dispatched."
 };
 
 // State management
@@ -272,7 +272,7 @@ function generateShareLink(directToTracker) {
   
   // Try copying to clipboard
   navigator.clipboard.writeText(link).then(() => {
-    showToast("📋 Prank link copied! Send it to your friend.");
+    showToast("📋 Flight link copied! Send it to your friend.");
   }).catch(() => {
     showToast("Link generated! Copy it from the field below.");
   });
@@ -386,10 +386,10 @@ function startFlightTracker() {
     }
   }, 1000);
   
-  // Prank Reveal Timer
-  const delayMs = parseInt(config.prankDelay) * 1000;
+  // Alert Reveal Timer
+  const delayMs = parseInt(config.alertDelay) * 1000;
   
-  const prankTimer = setTimeout(() => {
+  const alertTimer = setTimeout(() => {
     // Update badge to ALERT
     const badge = document.getElementById("track-status-badge");
     badge.className = "status-badge status-cancelled";
@@ -401,7 +401,7 @@ function startFlightTracker() {
     addConsoleLine(`REDIRECTING LINK TO PRANK CONSOLE...`);
     
     setTimeout(() => {
-      triggerPrankReveal();
+      triggerAlertReveal();
     }, 1500);
   }, delayMs);
   
@@ -546,7 +546,7 @@ function startFlightTracker() {
   // Cleanup functions
   window.onbeforeunload = () => {
     clearInterval(telemetryInterval);
-    clearTimeout(prankTimer);
+    clearTimeout(alertTimer);
     if (mapAnimationId) cancelAnimationFrame(mapAnimationId);
   };
 }
@@ -597,13 +597,13 @@ function addConsoleLine(text) {
 // -------------------------------------------------------------------
 // THE PRANK REVEAL OVERLAY INJECTOR
 // -------------------------------------------------------------------
-function triggerPrankReveal() {
-  const overlay = document.getElementById("prank-popup");
+function triggerAlertReveal() {
+  const overlay = document.getElementById("alert-popup");
   const config = currentConfig;
   
-  // Populate prank card text
-  document.getElementById("prank-reveal-title").innerText = config.prankTitle;
-  document.getElementById("prank-reveal-msg").innerText = config.prankMsg;
+  // Populate alert card text
+  document.getElementById("alert-reveal-title").innerText = config.alertTitle;
+  document.getElementById("alert-reveal-msg").innerText = config.alertMsg;
   
   // Show it!
   overlay.classList.add("show");
@@ -631,7 +631,7 @@ function triggerPrankReveal() {
   }
   
   // Bind close button to simply dismiss overlay
-  const revealBtn = document.getElementById("btn-prank-close");
+  const revealBtn = document.getElementById("btn-alert-close");
   revealBtn.onclick = () => {
     overlay.classList.remove("show");
   };

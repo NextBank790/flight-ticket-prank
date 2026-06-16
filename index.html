@@ -21,9 +21,9 @@
     <div class="app-container">
       <header style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="font-size: 2.25rem; font-family: var(--font-heading); background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-          <i class="fas fa-mask"></i> Flight Ticket Prank Generator
+          <i class="fas fa-mask"></i> Boarding Pass & Flight Status Suite
         </h1>
-        <p style="color: var(--text-secondary); margin-top: 0.25rem;">Create a realistic flight boarding pass & a fake tracking dashboard to fool your friends.</p>
+        <p style="color: var(--text-secondary); margin-top: 0.25rem;">Create a realistic flight boarding pass & a fake tracking dashboard to verify flight details.</p>
       </header>
       
       <div class="creator-layout">
@@ -117,16 +117,16 @@
               <input type="text" id="input-arrTime" class="glass-input" placeholder="e.g. 02:15 PM">
             </div>
 
-            <!-- Prank Reveal Settings -->
+            <!-- Override & Warning System -->
             <div class="form-group full-width" style="margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
               <h3 style="font-size: 1rem; color: var(--warning); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fas fa-ghost"></i> Prank Reveal Settings
+                <i class="fas fa-ghost"></i> Override & Warning System
               </h3>
             </div>
             
             <div class="form-group">
-              <label for="input-prankType">Prank Alert Type</label>
-              <select id="input-prankType" class="glass-input">
+              <label for="input-alertType">System Event Trigger</label>
+              <select id="input-alertType" class="glass-input">
                 <option value="security">TSA Security Red Flag</option>
                 <option value="customs">Customs/Luggage Hold</option>
                 <option value="delayed">Indefinite Flight Delay</option>
@@ -135,8 +135,8 @@
             </div>
             
             <div class="form-group">
-              <label for="input-prankDelay">Trigger Delay (Seconds)</label>
-              <select id="input-prankDelay" class="glass-input">
+              <label for="input-alertDelay">Trigger Delay (Seconds)</label>
+              <select id="input-alertDelay" class="glass-input">
                 <option value="3">3 Seconds</option>
                 <option value="5" selected>5 Seconds</option>
                 <option value="10">10 Seconds</option>
@@ -146,21 +146,21 @@
             </div>
             
             <div class="form-group full-width">
-              <label for="input-prankTitle">Prank Popup Title</label>
-              <input type="text" id="input-prankTitle" class="glass-input" placeholder="e.g. CUSTOMS VIOLATION WARNING">
+              <label for="input-alertTitle">System Override Title</label>
+              <input type="text" id="input-alertTitle" class="glass-input" placeholder="e.g. CUSTOMS VIOLATION WARNING">
             </div>
             
             <div class="form-group full-width">
-              <label for="input-prankMsg">Prank Alert Message</label>
-              <textarea id="input-prankMsg" class="glass-input" rows="4" style="resize: none;" placeholder="Warning text..."></textarea>
+              <label for="input-alertMsg">System Override Message</label>
+              <textarea id="input-alertMsg" class="glass-input" rows="4" style="resize: none;" placeholder="Warning text..."></textarea>
             </div>
             
             <div class="form-group full-width" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
               <button type="button" id="btn-generate-ticket" class="btn-primary">
-                <i class="fas fa-link"></i> Copy Boarding Pass Prank Link
+                <i class="fas fa-link"></i> Copy Boarding Pass Link
               </button>
               <button type="button" id="btn-generate-tracker" class="btn-secondary">
-                <i class="fas fa-compass"></i> Copy Direct Tracker Link
+                <i class="fas fa-compass"></i> Copy Flight Tracker Link
               </button>
             </div>
           </form>
@@ -174,8 +174,8 @@
             <div style="background: white; padding: 0.75rem; border-radius: 0.75rem; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); margin: 0.5rem 0;">
               <img id="share-qr-code" src="" alt="Scan Me to Track" style="width: 150px; height: 150px; display: block;">
             </div>
-            <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;">Scan to Track Flight (Prank Live)</span>
-            <span style="font-size: 0.7rem; color: var(--text-secondary);">Show this QR code on your screen to your friend. When they scan it with their phone camera, they will immediately open the flight status page and trigger the prank!</span>
+            <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;">Scan to Track Flight Status</span>
+            <span style="font-size: 0.7rem; color: var(--text-secondary);">Show this QR code on your screen to your friend. When they scan it with their phone camera, they will immediately open the flight status page and open the flight status.</span>
           </div>
 
         </div>
@@ -322,16 +322,16 @@
   <!-- ========================================== -->
   <!-- 4. PRANK VICTIM WARNING OVERLAY MODAL      -->
   <!-- ========================================== -->
-  <div id="prank-popup" class="prank-overlay">
-    <div class="prank-card">
-      <div class="prank-icon">
+  <div id="alert-popup" class="alert-overlay">
+    <div class="alert-card">
+      <div class="alert-icon">
         <i class="fas fa-exclamation-triangle"></i>
       </div>
-      <h2 id="prank-reveal-title" class="prank-title">SECURITY WARNING</h2>
-      <p id="prank-reveal-msg" class="prank-msg">
+      <h2 id="alert-reveal-title" class="alert-title">SECURITY WARNING</h2>
+      <p id="alert-reveal-msg" class="alert-msg">
         The flight tracker server has encountered a safety conflict warning. Please report to the gate service desk immediately.
       </p>
-      <button id="btn-prank-close" class="btn-primary" style="background: var(--danger); box-shadow: 0 4px 14px rgba(239,68,68,0.4); width: 100%;">
+      <button id="btn-alert-close" class="btn-primary" style="background: var(--danger); box-shadow: 0 4px 14px rgba(239,68,68,0.4); width: 100%;">
         Acknowledge Notice
       </button>
     </div>

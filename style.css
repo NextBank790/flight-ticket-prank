@@ -573,8 +573,8 @@ label {
   color: #06b6d4;
 }
 
-/* Prank Screen (Victim Alert Overlay) */
-.prank-overlay {
+/* Alert Screen (Victim Alert Overlay) */
+.alert-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -592,12 +592,12 @@ label {
   backdrop-filter: blur(10px);
 }
 
-.prank-overlay.show {
+.alert-overlay.show {
   opacity: 1;
   pointer-events: all;
 }
 
-.prank-card {
+.alert-card {
   max-width: 500px;
   width: 100%;
   background: rgba(15, 23, 42, 0.8);
@@ -612,11 +612,11 @@ label {
   overflow: hidden;
 }
 
-.prank-overlay.show .prank-card {
+.alert-overlay.show .alert-card {
   transform: scale(1);
 }
 
-.prank-card::before {
+.alert-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -627,21 +627,21 @@ label {
   animation: alarmBar 2s linear infinite;
 }
 
-.prank-icon {
+.alert-icon {
   font-size: 4rem;
   color: var(--danger);
   margin-bottom: 1.5rem;
   animation: shakeWarning 1s ease-in-out infinite;
 }
 
-.prank-title {
+.alert-title {
   font-family: var(--font-heading);
   font-size: 1.75rem;
   color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
-.prank-msg {
+.alert-msg {
   font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
