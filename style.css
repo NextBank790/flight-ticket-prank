@@ -743,3 +743,91 @@ label {
 .toast-notification.show {
   transform: translateX(-50%) translateY(0);
 }
+
+/* Print Stylesheet for PDF/Paper Export */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    background-image: none !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  #creator-view,
+  header,
+  .btn-primary,
+  .btn-secondary,
+  .share-result-card,
+  #btn-track-flight,
+  #btn-print-ticket,
+  .toast-notification,
+  .tracker-container,
+  #tracker-view,
+  .radar-console,
+  span[style*="text-align: center"],
+  div[style*="margin-top: 2rem"] {
+    display: none !important;
+  }
+  
+  .view-section {
+    display: none !important;
+  }
+  
+  .view-section.active {
+    display: block !important;
+  }
+  
+  .view-section.active .boarding-pass-card {
+    display: block !important;
+    margin: 2cm auto !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+  }
+  
+  .boarding-pass-card * {
+    color: #000000 !important;
+  }
+  
+  .ticket-header {
+    background: var(--airline-primary) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .ticket-header * {
+    color: white !important;
+  }
+  
+  .ticket-body {
+    background: #ffffff !important;
+  }
+  
+  .detail-label {
+    color: #666666 !important;
+  }
+  
+  .detail-value {
+    color: #000000 !important;
+  }
+  
+  .ticket-perforation {
+    border-top: 2px dashed #999 !important;
+  }
+  
+  .ticket-perforation::before,
+  .ticket-perforation::after {
+    background-color: white !important;
+  }
+  
+  .qr-code-wrapper {
+    box-shadow: none !important;
+    border: 1px solid #eee !important;
+    background: white !important;
+  }
+}

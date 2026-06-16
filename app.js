@@ -38,6 +38,14 @@ function initApp() {
   const ticketData = urlParams.get("t");
   const directTracker = urlParams.get("track");
 
+  // Bind print button click listener
+  const printBtn = document.getElementById("btn-print-ticket");
+  if (printBtn) {
+    printBtn.onclick = () => {
+      window.print();
+    };
+  }
+
   if (ticketData) {
     try {
       const decoded = decodeState(ticketData);
