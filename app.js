@@ -38,19 +38,40 @@ function initApp() {
   const ticketData = urlParams.get("t");
   const directTracker = urlParams.get("track");
 
-  // Bind print button click listener
+  // Helper function to download an element as PDF
+  const downloadPDF = (elementId) => {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    // Check if html2pdf is loaded (online)
+    if (typeof html2pdf !== "undefined") {
+      const opt = {
+        margin:       [10, 10, 10, 10],
+        filename:     'BoardingPass.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'pt', format: [440, 720], orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    } else {
+      // Fallback to native print dialog if offline
+      window.print();
+    }
+  };
+
+  // Bind print button click listener (Victim Card)
   const printBtn = document.getElementById("btn-print-ticket");
   if (printBtn) {
     printBtn.onclick = () => {
-      window.print();
+      downloadPDF("victim-boarding-pass");
     };
   }
 
-  // Bind print preview button click listener
+  // Bind print preview button click listener (Creator Card)
   const printPreviewBtn = document.getElementById("btn-print-preview");
   if (printPreviewBtn) {
     printPreviewBtn.onclick = () => {
-      window.print();
+      downloadPDF("preview-boarding-pass");
     };
   }
 
