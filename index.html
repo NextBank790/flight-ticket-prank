@@ -166,12 +166,16 @@
           </form>
 
           <!-- Resulting Share Link Container -->
-          <div id="share-result" class="share-result-card" style="display: none;">
-            <span style="font-size: 0.8rem; color: var(--success); font-weight: 600;">Generated Link:</span>
-            <div class="share-link-row">
+          <div id="share-result" class="share-result-card" style="display: none; flex-direction: column; align-items: center; gap: 0.75rem; text-align: center;">
+            <span style="font-size: 0.8rem; color: var(--success); font-weight: 600; align-self: flex-start;">Generated Link:</span>
+            <div class="share-link-row" style="width: 100%;">
               <input type="text" id="share-link-url" class="share-link-input" readonly>
             </div>
-            <span style="font-size: 0.7rem; color: var(--text-secondary);">Send this URL to your friend. When they open it, they will see the ticket or tracking page, and after a few seconds the prank alert will trigger.</span>
+            <div style="background: white; padding: 0.75rem; border-radius: 0.75rem; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); margin: 0.5rem 0;">
+              <img id="share-qr-code" src="" alt="Scan Me to Track" style="width: 150px; height: 150px; display: block;">
+            </div>
+            <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;">Scan to Track Flight (Prank Live)</span>
+            <span style="font-size: 0.7rem; color: var(--text-secondary);">Show this QR code on your screen to your friend. When they scan it with their phone camera, they will immediately open the flight status page and trigger the prank!</span>
           </div>
 
         </div>

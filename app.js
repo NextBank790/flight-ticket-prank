@@ -248,9 +248,16 @@ function generateShareLink(directToTracker) {
   // Display result panel
   const resultCard = document.getElementById("share-result");
   const linkInput = document.getElementById("share-link-url");
+  const qrImage = document.getElementById("share-qr-code");
   
   resultCard.style.display = "flex";
   linkInput.value = link;
+  
+  // Update QR Code image source
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(link)}`;
+  if (qrImage) {
+    qrImage.src = qrCodeUrl;
+  }
   
   // Select text
   linkInput.select();
