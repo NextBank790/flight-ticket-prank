@@ -1,0 +1,745 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Global Variables */
+:root {
+  --bg-primary: #0b0f19;
+  --bg-secondary: #161e2e;
+  --bg-card: rgba(22, 30, 46, 0.7);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  --accent: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.35);
+  
+  --airline-primary: #2563eb;
+  --airline-secondary: #1d4ed8;
+  --airline-text: #ffffff;
+  
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #06b6d4;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-mono: 'Courier Prime', monospace;
+}
+
+/* Airline Theme Classes */
+.theme-emirates {
+  --airline-primary: #d71920;
+  --airline-secondary: #a80f15;
+  --airline-text: #ffffff;
+}
+
+.theme-delta {
+  --airline-primary: #001a54;
+  --airline-secondary: #e51937;
+  --airline-text: #ffffff;
+}
+
+.theme-lufthansa {
+  --airline-primary: #002f6c;
+  --airline-secondary: #ffc600;
+  --airline-text: #ffffff;
+}
+
+.theme-singapore {
+  --airline-primary: #0c2340;
+  --airline-secondary: #cca43b;
+  --airline-text: #ffffff;
+}
+
+.theme-generic {
+  --airline-primary: #0f172a;
+  --airline-secondary: #10b981;
+  --airline-text: #f3f4f6;
+}
+
+/* CSS Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* Layout Utilities */
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Views Management */
+.view-section {
+  display: none;
+}
+.view-section.active {
+  display: block;
+}
+
+/* Glassmorphism Components */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-input {
+  background: rgba(10, 15, 26, 0.5);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.glass-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Creator Layout */
+.creator-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .creator-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-secondary);
+}
+
+/* Ticket Preview & Boarding Pass Design */
+.ticket-preview-container {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.boarding-pass-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.ticket-header {
+  background: var(--airline-primary);
+  padding: 1.5rem;
+  color: var(--airline-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.airline-logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticket-class {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.ticket-body {
+  padding: 1.5rem;
+  background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.3) 0%, rgba(15, 23, 42, 0.5) 100%);
+  position: relative;
+}
+
+/* The Ticket Separation Perforation */
+.ticket-perforation {
+  height: 0;
+  border-top: 2px dashed rgba(255, 255, 255, 0.08);
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.ticket-perforation::before,
+.ticket-perforation::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.ticket-perforation::before {
+  left: -25px;
+}
+
+.ticket-perforation::after {
+  right: -25px;
+}
+
+/* Flight Details grid */
+.flight-route {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.airport-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.airport-info.align-right {
+  align-items: flex-end;
+}
+
+.airport-code {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.airport-city {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.flight-plane-icon {
+  color: var(--airline-secondary);
+  font-size: 1.5rem;
+  animation: planeFloat 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 80px;
+}
+
+.flight-plane-icon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed var(--border-color);
+  z-index: 0;
+}
+
+.flight-plane-icon i {
+  background: var(--bg-secondary);
+  padding: 0 0.5rem;
+  z-index: 1;
+}
+
+/* Passenger details grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-item.span-2 {
+  grid-column: span 2;
+}
+
+.detail-item.span-3 {
+  grid-column: span 3;
+}
+
+.ticket-barcode-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.qr-code-wrapper {
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.qr-code-placeholder {
+  width: 140px;
+  height: 140px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.barcode-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  margin-top: 0.75rem;
+}
+
+/* Live Flight Tracker UI */
+.tracker-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  min-height: 500px;
+}
+
+@media (max-width: 1024px) {
+  .tracker-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tracker-map-panel {
+  position: relative;
+  overflow: hidden;
+  height: 550px;
+  border-radius: 1rem;
+}
+
+.tracker-map {
+  width: 100%;
+  height: 100%;
+  background: #090d16;
+  position: relative;
+}
+
+.map-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.tracker-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.telemetry-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.telemetry-card {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  background: rgba(10, 15, 26, 0.4);
+  border: 1px solid var(--border-color);
+}
+
+.telemetry-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.telemetry-val {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.telemetry-unit {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-left: 0.25rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.status-badge.status-ontime {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-delayed {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.status-cancelled {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: pulseDot 1.5s infinite;
+}
+
+/* Radar Log Console */
+.radar-console {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #10b981;
+  padding: 1rem;
+  height: 180px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.console-line {
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.console-line::before {
+  content: '> ';
+  color: #06b6d4;
+}
+
+/* Prank Screen (Victim Alert Overlay) */
+.prank-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(4, 6, 10, 0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+  backdrop-filter: blur(10px);
+}
+
+.prank-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.prank-card {
+  max-width: 500px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid var(--danger);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(239, 68, 68, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.prank-overlay.show .prank-card {
+  transform: scale(1);
+}
+
+.prank-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--danger), #f59e0b, var(--danger));
+  animation: alarmBar 2s linear infinite;
+}
+
+.prank-icon {
+  font-size: 4rem;
+  color: var(--danger);
+  margin-bottom: 1.5rem;
+  animation: shakeWarning 1s ease-in-out infinite;
+}
+
+.prank-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.prank-msg {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Animations */
+@keyframes planeFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+}
+
+@keyframes shakeWarning {
+  0%, 100% { transform: rotate(0deg); }
+  20%, 60% { transform: rotate(-5deg); }
+  40%, 80% { transform: rotate(5deg); }
+}
+
+@keyframes alarmBar {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* QR Code Custom SVG Styling */
+.qr-dot {
+  fill: #000000;
+}
+
+/* Link Share Card UI */
+.share-result-card {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px dashed rgba(16, 185, 129, 0.4);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.share-link-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.share-link-input {
+  flex-grow: 1;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  color: var(--success);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  color: var(--text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+}
